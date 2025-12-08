@@ -48,7 +48,7 @@ public class VivaQ3 {
         System.out.println("Longest mirrorable substring: " + longestMirrorable);
     }
 
-    private static void addMirrorPair(char c1, char c2) {
+    public static void addMirrorPair(char c1, char c2) {
         if (pairCount < originalChars.length - 1) {
             originalChars[pairCount] = c1;
             mirroredChars[pairCount] = c2;
@@ -60,7 +60,7 @@ public class VivaQ3 {
         }
     }
 
-    private static void initializeDefaultMirrorPairs() {
+    public static void initializeDefaultMirrorPairs() {
         // Self-mirroring characters
         char[] selfMirroring = { 'A', 'H', 'I', 'M', 'O', 'T', 'U', 'V', 'W', 'X', 'Y', '1', '8', '0', 'i', 'l', 'm',
                 'o', 't', 'u', 'v', 'w', 'x' };
@@ -109,7 +109,7 @@ public class VivaQ3 {
         return longest.length() < 2 ? "-" : longest;
     }
 
-    private static int expandAroundCenter(String s, int left, int right) {
+    public static int expandAroundCenter(String s, int left, int right) {
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
@@ -139,7 +139,7 @@ public class VivaQ3 {
         return longestMirrorable.length() < 2 ? "-" : longestMirrorable;
     }
 
-    private static boolean isMirrorable(String s) {
+    public static boolean isMirrorable(String s) {
         int n = s.length();
         // Loop from the outside in. (n + 1) / 2 handles both odd and even lengths
         // correctly and efficiently.
