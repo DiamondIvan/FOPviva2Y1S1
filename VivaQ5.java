@@ -27,7 +27,7 @@ public class VivaQ5 {
             System.out.println("Cannot less than 1. Please enter again:");
             ballValue = cs.nextInt();
         }
-
+        cs.nextLine();
         System.out.print("Target number: ");
         int target = cs.nextInt();
         while (length == 3 && (target < 0 || target > 999)) {
@@ -58,9 +58,9 @@ public class VivaQ5 {
             }
         }
 
-        if (!nearMissList.equals("")) {
+        if (!nearMissList.equals("") && status == false) {
             System.out.println("You almost get it\n" + nearMissList);
-        } else if (nearMissList.equals(""))
+        } else if (nearMissList.equals("") && status == false)
             System.out.println("Try again next time");
     }
 
@@ -81,15 +81,13 @@ public class VivaQ5 {
     }
 
     public static void displayNum(int[] num, int numOfBall) {
-        int colm = (int) Math.sqrt(numOfBall);
-        int row = numOfBall / colm;
+        int colm = (int) Math.ceil(Math.sqrt(numOfBall));
 
         for (int i = 0; i < num.length; i++) {
             System.out.print(num[i] + "\t");
-            if ((i + 1) % row == 0)
+            if ((i + 1) % colm == 0)
                 System.out.println();
         }
-
     }
 
     public static boolean foundTarget(int target, int poolNumber) {
