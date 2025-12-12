@@ -5,8 +5,8 @@ public class VivaQ2 {
         Scanner cs = new Scanner(System.in);
         System.out.print("Enter number:");
         String num = cs.nextLine();
-        System.out.println("Largest number: " + getLargestNum(num));
-        System.out.println("Smallest number: " + getSmallestNum(num));
+        System.out.println("Largest number: " + Integer.parseInt(getLargestNum(num)));
+        System.out.println("Smallest number: " + Integer.parseInt(getSmallestNum(num)));
     }
 
     public static String getLargestNum(String num) {
