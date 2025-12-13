@@ -43,6 +43,7 @@ public class VivaQ3 {
         }
         // returns the length of palindrome (number)
         return right - left - 1;
+
     }
 
     // 4. Method to find longest palindrome
