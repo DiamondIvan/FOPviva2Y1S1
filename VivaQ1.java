@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class VivaQ1 {
 
+    // 1. Method to count characters in a string
     public static int countChar(String str) {
         int count = 0;
         for (int i = 0; i < str.length(); i++) {
@@ -10,9 +11,11 @@ public class VivaQ1 {
         return count;
     }
 
+    // 2. Method to check if two words are anagrams
     public static boolean isAnagram(String a, String b) {
-        a = a.toLowerCase();
-        b = b.toLowerCase();
+        a = a.toLowerCase(); 
+        b = b.toLowerCase(); 
+
 
         boolean[] lettersA = new boolean[26];
         boolean[] lettersB = new boolean[26];
@@ -33,11 +36,13 @@ public class VivaQ1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Enter number of words: ");
         int n = sc.nextInt();
         String[] words = new String[n];
         int size = 0;
 
         for (int i = 0; i < words.length; i++) {
+            System.out.print("Enter word " + (i + 1) + ": ");
             String w = sc.next().toLowerCase();
             boolean duplicate = false;
 
@@ -57,8 +62,6 @@ public class VivaQ1 {
         int groupNum = 1;
 
         for (int i = 0; i < size; i++) {
-            if (grouped[i])
-                continue;
 
             boolean found = false;
 
@@ -73,7 +76,7 @@ public class VivaQ1 {
                 }
             }
 
-            if (found) {
+            if (found) { 
                 grouped[i] = true;
                 System.out.println();
                 groupNum++;
