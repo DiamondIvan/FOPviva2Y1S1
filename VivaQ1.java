@@ -62,6 +62,8 @@ public class VivaQ1 {
         int groupNum = 1;
 
         for (int i = 0; i < size; i++) {
+            if (grouped[i])
+                continue;
 
             boolean found = false;
 
