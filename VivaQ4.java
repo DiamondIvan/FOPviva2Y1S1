@@ -5,6 +5,7 @@ public class VivaQ4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Enter a message: ");
         String text = "";
 
         while (true) {
