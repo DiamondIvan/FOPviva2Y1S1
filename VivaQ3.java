@@ -21,9 +21,9 @@ public class VivaQ3 {
     // 2. Method to initialize default mirror pairs
     public static void initDefaultPairs() {
         char[] self = { 'A', 'H', 'I', 'M', 'O', 'T', 'U', 'V', 'W', 'X', 'Y', 'o', 'u', 'v', 'w' };
-        for (char c : self) {
-            original[count] = c;
-            mirror[count] = c;
+        for (int i = 0; i < self.length; i++) {
+            original[count] = self[i];
+            mirror[count] = self[i];
             count++;
         }
 
@@ -55,7 +55,7 @@ public class VivaQ3 {
             int len = Math.max(len1, len2);
 
             if (len > longest.length()) {
-                int start = i - (len - 1) / 2;
+                int start = i - (len - 1) / 2; // racecar
                 longest = s.substring(start, start + len);
             }
         }
