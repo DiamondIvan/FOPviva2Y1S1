@@ -13,9 +13,8 @@ public class VivaQ1 {
 
     // 2. Method to check if two words are anagrams
     public static boolean isAnagram(String a, String b) {
-        a = a.toLowerCase(); 
-        b = b.toLowerCase(); 
-
+        a = a.toLowerCase();
+        b = b.toLowerCase();
 
         boolean[] lettersA = new boolean[26];
         boolean[] lettersB = new boolean[26];
@@ -78,7 +77,7 @@ public class VivaQ1 {
                 }
             }
 
-            if (found) { 
+            if (found) {
                 grouped[i] = true;
                 System.out.println();
                 groupNum++;
@@ -93,5 +92,6 @@ public class VivaQ1 {
             }
         }
         System.out.println();
+        sc.close();
     }
 }

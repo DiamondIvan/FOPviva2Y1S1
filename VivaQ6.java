@@ -36,6 +36,7 @@ public class VivaQ6 {
                 break;
             default:
                 System.out.println("Invalid move!");
+                sc.close();
                 return;
         }
 
