@@ -43,7 +43,7 @@ public class VivaQ3 {
     }
 
     // 4. Method to find longest palindrome substring
-    public static String longestPalindrome(String s) {
+    public static String getLongestPalindrome(String s) {
         if (s == null || s.length() < 2)
             return "-";
 
@@ -84,7 +84,7 @@ public class VivaQ3 {
     }
 
     // 6. Method to find longest mirrorable substring
-    public static String longestMirrorWord(String s) {
+    public static String getLongestMirrorWord(String s) {
         if (s == null || s.length() < 2)
             return "-";
 
@@ -127,7 +127,7 @@ public class VivaQ3 {
         String word = sc.nextLine();
         sc.close();
 
-        System.out.println("Longest palindrome substring: " + longestPalindrome(word));
-        System.out.println("Longest mirrorable substring: " + longestMirrorWord(word));
+        System.out.println("Longest palindrome substring: " + getLongestPalindrome(word));
+        System.out.println("Longest mirrorable substring: " + getLongestMirrorWord(word));
     }
 }
