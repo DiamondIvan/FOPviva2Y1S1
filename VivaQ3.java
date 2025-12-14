@@ -2,155 +2,132 @@ import java.util.Scanner;
 
 public class VivaQ3 {
 
-    public static char[] originalChars = new char[50];
-    public static char[] mirroredChars = new char[50];
-    public static int pairCount = 0;
+    // Store mirror pairs
+    public static char[] original = new char[50];
+    public static char[] mirror = new char[50];
+    public static int count = 0;
 
-    // 1. Method to add a mirror pair to the arrays
-    public static void addMirrorPair(char c1, char c2) {
-        if (pairCount < originalChars.length) {
-            originalChars[pairCount] = c1;
-            mirroredChars[pairCount] = c2;
-            pairCount++;
-            // Add the reverse form
-            originalChars[pairCount] = c2;
-            mirroredChars[pairCount] = c1;
-            pairCount++;
-        }
+    // 1. Method to add mirror pairs
+    public static void addMirrorPair(char a, char b) {
+        original[count] = a;
+        mirror[count] = b;
+        count++;
+
+        original[count] = b;
+        mirror[count] = a;
+        count++;
     }
 
     // 2. Method to initialize default mirror pairs
-    public static void initializeDefaultMirrorPairs() {
-        char[] selfMirroring = { 'A', 'H', 'I', 'M', 'O', 'T', 'U', 'V', 'W', 'X', 'Y', 'o', 'u', 'v', 'w' };
-
-        for (char c : selfMirroring) {
-            if (pairCount < originalChars.length) {
-                originalChars[pairCount] = c;
-                mirroredChars[pairCount] = c;
-                pairCount++;
-            }
+    public static void initDefaultPairs() {
+        char[] self = { 'A', 'H', 'I', 'M', 'O', 'T', 'U', 'V', 'W', 'X', 'Y', 'o', 'u', 'v', 'w' };
+        for (int i = 0; i < self.length; i++) {
+            original[count] = self[i];
+            mirror[count] = self[i];
+            count++;
         }
 
         addMirrorPair('b', 'd');
         addMirrorPair('p', 'q');
     }
 
-    // 3. Method to find length of palindrome (helper method)
-    public static int expandAroundCenter(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+    // 3. Method to expand around center for palindrome
+    // This method assumes that left already = right and stops when symmetry stops
+    public static int expand(String s, int left, int right) {
+        while (left >= 0 && right < s.length()
+                && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
         }
-        // returns the length of palindrome (number)
         return right - left - 1;
     }
 
-    // 4. Method to find longest palindrome
+    // 4. Method to find longest palindrome substring
     public static String getLongestPalindrome(String s) {
-        if (s == null || s.length() < 1)
+        if (s == null || s.length() < 2)
             return "-";
+
         String longest = "";
 
-        // For odd length palindromes (centre is i)
         for (int i = 0; i < s.length(); i++) {
-            int len1 = expandAroundCenter(s, i, i);
-            if (len1 > longest.length()) {
-                int start = i - (len1 - 1) / 2;
-                longest = s.substring(start, start + len1);
-            }
+            int len1 = expand(s, i, i); // odd
+            int len2 = expand(s, i, i + 1); // even
+            int len = Math.max(len1, len2);
 
-            // For even length palindromes (centre is i and i+1)
-            int len2 = expandAroundCenter(s, i, i + 1);
-            if (len2 > longest.length()) {
-                int start = i - (len2 - 1) / 2;
-                longest = s.substring(start, start + len2);
+            if (len > longest.length()) {
+                int start = i - (len - 1) / 2; // racecar
+                longest = s.substring(start, start + len);
             }
         }
-
-        // Return "-" if no palindrome found
-        return longest.length() < 2 ? longest : "-";
+        return longest.length() >= 2 ? longest : "-";
     }
 
-    // 5. Method to find where if palindrome is mirrorable
+    // 5. Method to check if a string is mirrorable
     public static boolean isMirrorable(String s) {
         int n = s.length();
-        // check from outside to inside
-        for (int i = 0; i < (n + 1) / 2; i++) {
-            char leftChar = s.charAt(i);
-            char rightChar = s.charAt(n - 1 - i);
 
-            boolean pairFound = false;
-            // Find whether mirrored pair exists
-            for (int k = 0; k < pairCount; k++) {
-                if (originalChars[k] == leftChar && mirroredChars[k] == rightChar) {
-                    pairFound = true;
+        for (int i = 0; i <= n / 2; i++) {
+            char left = s.charAt(i);
+            char right = s.charAt(n - 1 - i);
+
+            boolean found = false;
+            for (int k = 0; k < count; k++) {
+                if (original[k] == left && mirror[k] == right) {
+                    found = true;
                     break;
                 }
             }
-
-            if (!pairFound) {
+            if (!found)
                 return false;
-            }
         }
         return true;
     }
 
-    // 6. Method to find longest mirrorable palindrome
+    // 6. Method to find longest mirrorable substring
     public static String getLongestMirrorWord(String s) {
-        if (s == null || s.length() < 1)
+        if (s == null || s.length() < 2)
             return "-";
-        String longestMirrorable = "";
 
-        // Search through all possible substrings
+        String longest = "-";
+
         for (int i = 0; i < s.length(); i++) {
-            for (int j = 1; j < s.length(); j++) {
-                String sub = s.substring(i, j + 1);
-                if (isMirrorable(sub) && sub.length() > longestMirrorable.length()) {
-                    longestMirrorable = sub;
+            for (int j = i + 1; j <= s.length(); j++) {
+                String sub = s.substring(i, j);
+                if (sub.length() >= 2 && isMirrorable(sub)
+                        && sub.length() > longest.length()) {
+                    longest = sub;
                 }
             }
         }
-        // Return "-" if no mirrorable string (length < 2 is found)
-        return longestMirrorable.length() < 2 ? "-" : longestMirrorable;
+        return longest;
     }
 
-    // Main method: user input and finding palindromes
+    // Main method
     public static void main(String[] args) {
-        // 1. Initialise default mirror pairs
-        initializeDefaultMirrorPairs();
-
+        initDefaultPairs();
         Scanner sc = new Scanner(System.in);
 
-        // 2. Allow user to add up to 10 new mirror pairs
-        System.out.println("Enter up to 10 new mirror pairs (e.g., 'b d'). Press Enter on an empty line to stop.");
+        System.out.println("Enter up to 10 mirror pairs (e.g. b d). Press Enter to stop.");
         for (int i = 0; i < 10; i++) {
             System.out.print("Pair " + (i + 1) + ": ");
             String line = sc.nextLine();
-            if (line.isEmpty()) {
+            if (line.isEmpty())
                 break;
-            }
-            String[] parts = line.split("\\s+");
-            if (parts.length == 2 && parts[0].length() == 1 && parts[1].length() == 1) {
-                char c1 = parts[0].charAt(0);
-                char c2 = parts[1].charAt(0);
-                addMirrorPair(c1, c2); // Add the reverse form automatically
-                System.out.println("Added pair: " + c1 + " <-> " + c2);
+
+            String[] p = line.split("\\s+");
+            if (p.length == 2 && p[0].length() == 1 && p[1].length() == 1) {
+                addMirrorPair(p[0].charAt(0), p[1].charAt(0));
             } else {
-                System.out.println("Invalid input. Please enter two characters separated by a space.");
-                i--; // Decrement to re-prompt for the same pair number
+                System.out.println("Invalid input.");
+                i--;
             }
         }
 
-        // 3. Read a string from the user
-        System.out.print("\nEnter a word to analyze: ");
-        String inputWord = sc.nextLine();
+        System.out.print("\nEnter a word: ");
+        String word = sc.nextLine();
         sc.close();
 
-        // 4. Determine and display the longest palindrome and mirrorable substrings
-        String longestPalindrome = getLongestPalindrome(inputWord);
-        String longestMirrorable = getLongestMirrorWord(inputWord);
-
-        System.out.println("Longest palindrome substring: " + longestPalindrome);
-        System.out.println("Longest mirrorable substring: " + longestMirrorable);
+        System.out.println("Longest palindrome substring: " + getLongestPalindrome(word));
+        System.out.println("Longest mirrorable substring: " + getLongestMirrorWord(word));
     }
 }

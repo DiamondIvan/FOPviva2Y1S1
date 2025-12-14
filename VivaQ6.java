@@ -36,6 +36,7 @@ public class VivaQ6 {
                 break;
             default:
                 System.out.println("Invalid move!");
+                sc.close();
                 return;
         }
 
@@ -193,8 +194,10 @@ public class VivaQ6 {
     }
 
     public static void printGrid(int[][] grid) {
-        for (int[] row : grid) {
-            for (int val : row) {
+        for (int i = 0; i < 4; i++) {
+            int[] row = grid[i];
+            for (int j = 0; j < 4; j++) {
+                int val = row[j];
                 System.out.printf("%4d", val);
             }
             System.out.println();

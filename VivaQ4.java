@@ -5,6 +5,7 @@ public class VivaQ4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Enter a message: ");
         String text = "";
 
         while (true) {
@@ -14,6 +15,9 @@ public class VivaQ4 {
             } // if user press blank on empty line, loop will stop
             text += line + " ";
         }
+
+        // Remove the trailing space added after the last line
+        text = text.trim();
 
         System.out.println("Word Count: " + wordCount(text));
         System.out.println("Character Count: " + characterCount(text));

@@ -63,6 +63,10 @@ public class VivaQ1 {
         for (int i = 0; i < size; i++) {
             if (grouped[i])
                 continue;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2c488ad6596648e0fd2a9ef7a063eccfa9528d34
             boolean found = false;
 
             for (int j = i + 1; j < size; j++) {
@@ -92,5 +96,10 @@ public class VivaQ1 {
             }
             System.out.println();
         }
+<<<<<<< HEAD
+=======
+        System.out.println();
+        sc.close();
+>>>>>>> 2c488ad6596648e0fd2a9ef7a063eccfa9528d34
     }
 }
