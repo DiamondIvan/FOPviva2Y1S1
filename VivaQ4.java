@@ -16,6 +16,9 @@ public class VivaQ4 {
             text += line + " ";
         }
 
+        // Remove the trailing space added after the last line
+        text = text.trim();
+
         System.out.println("Word Count: " + wordCount(text));
         System.out.println("Character Count: " + characterCount(text));
         System.out.println("Character Count without Space: " + characterCountWithoutSpaces(text));
