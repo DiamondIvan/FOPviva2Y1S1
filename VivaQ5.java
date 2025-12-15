@@ -27,7 +27,6 @@ public class VivaQ5 {
             System.out.println("Cannot less than 1. Please enter again:");
             ballValue = cs.nextInt();
         }
-        // Clear buffer
         cs.nextLine();
         System.out.print("Target number: ");
         int target = cs.nextInt();
@@ -63,7 +62,6 @@ public class VivaQ5 {
             System.out.println("You almost get it\n" + nearMissList);
         } else if (nearMissList.equals("") && status == false)
             System.out.println("Try again next time");
-        cs.close();
     }
 
     public static int[] generateNum(int numOfBall, int length) {
@@ -86,7 +84,7 @@ public class VivaQ5 {
         int colm = (int) Math.floor(Math.sqrt(numOfBall));
 
         for (int i = 0; i < num.length; i++) {
-            System.out.printf("%-6d", num[i]);
+            System.out.printf("%-8d", num[i]);
             if ((i + 1) % colm == 0 && (i + 1) < num.length)
                 System.out.println();
         }
