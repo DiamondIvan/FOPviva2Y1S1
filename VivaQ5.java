@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 import java.util.Random;
 
@@ -62,6 +61,7 @@ public class VivaQ5 {
             System.out.println("You almost get it\n" + nearMissList);
         } else if (nearMissList.equals("") && status == false)
             System.out.println("Try again next time");
+        cs.close();
     }
 
     public static int[] generateNum(int numOfBall, int length) {
