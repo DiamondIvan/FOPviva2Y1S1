@@ -5,7 +5,7 @@ public class VivaQ2 {
         Scanner cs = new Scanner(System.in);
         System.out.print("Enter number:");
         String num = cs.nextLine();
-        System.out.println("Largest number: " + Integer.parseInt(getLargestNum(num)));
+        System.out.println("Largest number: " + Integer.parseInt(getLargestNum(num).substring(0, 5)));
         System.out.println("Smallest number: " + Integer.parseInt(getSmallestNum(num)));
         cs.close();
     }
@@ -70,9 +70,11 @@ public class VivaQ2 {
                 }
             }
         }
-
-        return sb.toString();
-
+        int tracker = 5;
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == '0')
+                tracker++;
+        }
+        return sb.toString().substring(0, tracker);
     }
-
 }
